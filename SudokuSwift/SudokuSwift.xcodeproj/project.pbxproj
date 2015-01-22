@@ -422,6 +422,7 @@
 				1EC8DDD91A6F554900FE44DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1EC8DDDA1A6F554900FE44DD /* Build configuration list for PBXNativeTarget "SudokuSwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -430,6 +431,7 @@
 				1EC8DDDC1A6F554900FE44DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
