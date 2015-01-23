@@ -24,7 +24,30 @@ class SudokuCellTests: XCTestCase {
 	
 	func testValues() {
 		let cell = SudokuCell(name: "A1")
-		// TODO
+
+		// Eliminate
+		XCTAssertTrue(cell.eliminate("1"))
+		XCTAssertEqual(cell.values, "23456789")
+		XCTAssertTrue(cell.eliminate("1"))
+		XCTAssertEqual(cell.values, "23456789")
+		XCTAssertTrue(cell.eliminate("4"))
+		XCTAssertEqual(cell.values, "2356789")
+		XCTAssertTrue(cell.eliminate("9"))
+		XCTAssertEqual(cell.values, "235678")
+		XCTAssertFalse(cell.isSolved())
+
+		// Assign
+		XCTAssertTrue(cell.assign("6"))
+		XCTAssertEqual(cell.values, "6")
+		XCTAssertTrue(cell.isSolved())
+		
+		// Noop cases
+		XCTAssertTrue(cell.eliminate("5"))
+		XCTAssertTrue(cell.assign("6"))
+
+		// Contradinction cases
+		XCTAssertFalse(cell.eliminate("6"))
+		XCTAssertFalse(cell.assign("5"))
 	}
 	
 	func testUnits() {
