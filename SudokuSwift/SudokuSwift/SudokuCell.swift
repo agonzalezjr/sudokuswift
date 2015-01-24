@@ -24,8 +24,14 @@ class SudokuCell : Printable, DebugPrintable
 	
 	/// An array with the units the cell belongs to
 	private(set) var units: Array<Array<SudokuCell>>
-	
-	// MARK: Constructor
+
+	//** A computed (read-only) property
+	/// True if the cell is solved
+	var isSolved: Bool {
+		return countElements(self.values) == 1
+	}
+
+	// MARK: Initializer
 	
 	init(name: String, choices: Int = 9) {
 		self.name = name
@@ -35,13 +41,6 @@ class SudokuCell : Printable, DebugPrintable
 
 		self.peers = NSMutableSet()
 		self.units = []
-	}
-	
-	/**
-		Returns true if the cell is solved
-	*/
-	func isSolved() -> Bool {
-		return countElements(self.values) == 1
 	}
 	
 	/**

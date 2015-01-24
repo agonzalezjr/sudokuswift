@@ -16,7 +16,7 @@ class SudokuCellTests: XCTestCase {
 		XCTAssertEqual(cell.values, "123456789")
 		XCTAssertEqual(cell.peers.count, 0)
 		XCTAssertEqual(cell.units.count, 0)
-		XCTAssertFalse(cell.isSolved())
+		XCTAssertFalse(cell.isSolved)
 		
 		// This isn't calling the descrition or debugDescription methods :(
 		// println(cell)
@@ -34,12 +34,12 @@ class SudokuCellTests: XCTestCase {
 		XCTAssertEqual(cell.values, "2356789")
 		XCTAssertTrue(cell.eliminate("9"))
 		XCTAssertEqual(cell.values, "235678")
-		XCTAssertFalse(cell.isSolved())
+		XCTAssertFalse(cell.isSolved)
 
 		// Assign
 		XCTAssertTrue(cell.assign("6"))
 		XCTAssertEqual(cell.values, "6")
-		XCTAssertTrue(cell.isSolved())
+		XCTAssertTrue(cell.isSolved)
 		
 		// Noop cases
 		XCTAssertTrue(cell.eliminate("5"))
