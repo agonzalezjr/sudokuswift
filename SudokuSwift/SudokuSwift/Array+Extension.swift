@@ -21,7 +21,7 @@ extension Array {
 	
 	func any(evaluateElement: (T) -> Bool) -> Bool {
 		for element in self {
-			if (!evaluateElement(element)) {
+			if (evaluateElement(element)) {
 				return true
 			}
 		}
