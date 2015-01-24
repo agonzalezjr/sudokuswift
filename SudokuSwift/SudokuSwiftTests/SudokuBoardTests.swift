@@ -16,7 +16,23 @@ class SudokuBoardTests: XCTestCase {
 		XCTAssertEqual(countElements(b.initialState), 81)
 		XCTAssertFalse(b.isSolved)
 	}
-
+	
+	func testCells() {
+		let b = SudokuBoard()
+		XCTAssertEqual(b.cells.count, 81)
+		XCTAssertEqual(b.cells[0].name, "A1")
+		XCTAssertEqual(b.cells[23].name, "C6")
+		XCTAssertEqual(b.cells[80].name, "I9")
+	}
+	
+	func testUnits() {
+		// TODO:
+	}
+	
+	func testPeers() {
+		// TODO:
+	}
+	
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock() {
