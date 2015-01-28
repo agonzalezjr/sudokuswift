@@ -9,7 +9,7 @@
 import Foundation
 
 /// A cell in a Sudoku puzzle board
-class SudokuCell : Printable, DebugPrintable
+class SudokuCell : Printable, DebugPrintable, Equatable
 {
 	// MARK: Properties
 	
@@ -52,8 +52,10 @@ class SudokuCell : Printable, DebugPrintable
 	*/
 	func addUnit(unit: Array<SudokuCell>) {
 		self.units.append(unit)
-		for (peer) in unit {
-			self.peers.addObject(peer)
+		for peer in unit {
+			if peer != self {
+				self.peers.addObject(peer)
+			}
 		}
 	}
 	
@@ -131,3 +133,10 @@ class SudokuCell : Printable, DebugPrintable
 		return self.name
 	}
 }
+
+// MARK: Equatable Protocol
+
+func ==(lhs: SudokuCell, rhs: SudokuCell) -> Bool {
+	return lhs.name == rhs.name
+}
+
