@@ -36,7 +36,25 @@ class SudokuBoard {
 			return self.cachedIsSolved
 		}
 	}
+	
+	var state: String {
+		get {
+			return "".join(self.cells.map({$0.isSolved ? $0.values : "."}))
+		}
+	}
 
+	var prettyInitialState: String {
+		get {
+			return self.prettyHelper(self.initialState)
+		}
+	}
+	
+	var prettyState: String {
+		get {
+			return self.prettyHelper(self.state)
+		}
+	}
+	
 	// MARK: Private properties
 	
 	private var cachedIsSolved: Bool
@@ -177,5 +195,24 @@ class SudokuBoard {
 		}
 		
 		return unitsList;
+	}
+
+	private func prettyHelper(state: String) -> String {
+		var ret = ""
+		for c in Range(start:0, end:9) {
+			if c > 0 && c % 3 == 0 {
+				ret += "------+-------+------\n"
+			}
+			for r in 0..<9 {
+				if r > 0 && r % 3 == 0 {
+					ret += "| "
+				}
+				ret += state[c * 9 + r] + " "
+			}
+			if c != 8 {
+				ret += "\n"
+			}
+		}
+		return ret
 	}
 }

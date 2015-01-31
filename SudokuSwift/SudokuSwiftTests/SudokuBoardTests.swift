@@ -47,6 +47,19 @@ class SudokuBoardTests: XCTestCase {
 		// XCTAssert(b.cells.all({$0.peers.count == 20 && !$0.peers.containsObject($0)}))
 	}
 	
+	func testSolveEasy() {
+		let b = SudokuBoard(initialState: "..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..")
+		let solution = "483921657967345821251876493548132976729564138136798245372689514814253769695417382"
+		
+		println(b.initialState)
+		println(b.prettyInitialState)
+		
+	}
+	
+	func testSolveHard() {
+		
+	}
+	
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock() {
