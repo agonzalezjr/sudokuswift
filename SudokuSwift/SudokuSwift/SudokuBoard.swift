@@ -55,6 +55,35 @@ class SudokuBoard {
 		}
 	}
 	
+	var prettyValues: String {
+		get {
+			var ret = ""
+			
+			// The length of the widest cell (the one with the most choices)
+			let cellWidth = maxElement(self.cells.map({ countElements($0.values) }))
+			
+			// The horizontal separator (some cool string operations with literals)
+			let oneCell = String(count: 3 * (cellWidth + 1), repeatedValue: Character("-"))
+			let oneRow = "\n" + "+".join(Array(count: 3, repeatedValue: oneCell))
+			
+			for r in self.ROWS {
+				for c in self.COLUMNS {
+					let cell = self.getCellByName(String(r) + String(c))!
+					ret += cell.values + " "
+					if c == "3" || c == "6" {
+						ret += "|"
+					}
+				}
+				if r == "C" || r == "F" {
+					ret += oneRow
+				}
+				ret += "\n"
+			}
+			
+			return ret
+		}
+	}
+	
 	// MARK: Private properties
 	
 	private var cachedIsSolved: Bool
@@ -197,6 +226,8 @@ class SudokuBoard {
 		return unitsList;
 	}
 
+	// Given a board state as a row of characters, return it
+	// as a 9x9 nice string for printing ...
 	private func prettyHelper(state: String) -> String {
 		var ret = ""
 		for c in Range(start:0, end:9) {

@@ -53,6 +53,7 @@ class SudokuBoardTests: XCTestCase {
 		
 		println(b.initialState)
 		println(b.prettyInitialState)
+		println(b.prettyValues)
 		
 	}
 	
