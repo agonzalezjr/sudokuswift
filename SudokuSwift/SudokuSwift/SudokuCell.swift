@@ -88,7 +88,29 @@ class SudokuCell : Printable, DebugPrintable, Equatable
 		// Eliminate!
 		self.values = self.values.stringByReplacingOccurrencesOfString(value, withString: "")
 		
-		// TODO: The propagation ...
+		// Check this cell's units, if there is only one
+		// possibility for the eliminated value now, then assign
+		// the value to that lucky cell
+		for unit in self.units {
+			// d_places is an array of all the cells in the unit
+			// that aren't solved already where the value is a possibility
+			var d_places : Array<SudokuCell> = []
+			for cell in unit {
+				if cell.values.rangeOfString(value) != nil {
+					d_places.append(cell)
+				}
+			}
+
+			if d_places.count == 0 {
+				// Contradiction: there is no place for this value!
+				return false
+			}
+			else if d_places.count == 1 /* && !d_places[0].isSolved */ {
+				// We have only one choice and it's not because it's in
+				// a cell we already solved. Yay for new information!!
+				return d_places[0].assign(value)
+			}
+		}
 		
 		return true
 	}
@@ -118,8 +140,16 @@ class SudokuCell : Printable, DebugPrintable, Equatable
 		// Assign!
 		self.values = value
 		
-		// TODO: The propagation ...
-		
+		// We can now eliminate this value from all of this cell's peers
+		for peer in self.peers {
+			let peerCell = peer as SudokuCell
+			if !peerCell.eliminate(value) {
+				// There was a problem eliminating this value
+				// from the peers, so the assignation was wrong
+				return false
+			}
+		}
+		// All was good assigning this value to this cell
 		return true
 	}
 	

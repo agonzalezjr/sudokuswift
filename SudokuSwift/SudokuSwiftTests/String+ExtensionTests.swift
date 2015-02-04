@@ -35,4 +35,20 @@ class String_ExtensionTests: XCTestCase {
 		XCTAssertEqual("abc".index("b"), 1)
 		XCTAssertEqual("abc".index("c"), 2)
 	}
+	
+	func testljust() {
+		XCTAssertEqual("abc".ljust(5), "abc  ")
+		XCTAssertEqual("abc".ljust(2), "abc")
+	}
+
+	func testrjust() {
+		XCTAssertEqual("abc".rjust(5), "  abc")
+		XCTAssertEqual("abc".rjust(2), "abc")
+	}
+	
+	func testCenter() {
+		XCTAssertEqual("abc".center(5), " abc ")
+		XCTAssertEqual("abc".center(2), "abc")
+	}
+
 }

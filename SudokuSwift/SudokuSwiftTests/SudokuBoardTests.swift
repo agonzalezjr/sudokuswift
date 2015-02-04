@@ -55,6 +55,13 @@ class SudokuBoardTests: XCTestCase {
 		println(b.prettyInitialState)
 		println(b.prettyValues)
 		
+		XCTAssertFalse(b.isSolved)
+		
+		// Solve it!
+		XCTAssert(b.solve())
+		
+		XCTAssert(b.isSolved)
+		XCTAssertEqual(b.state, solution)
 	}
 	
 	func testSolveHard() {

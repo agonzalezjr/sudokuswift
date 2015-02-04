@@ -69,7 +69,7 @@ class SudokuBoard {
 			for r in self.ROWS {
 				for c in self.COLUMNS {
 					let cell = self.getCellByName(String(r) + String(c))!
-					ret += cell.values + " "
+					ret += cell.values.center(cellWidth) + " "
 					if c == "3" || c == "6" {
 						ret += "|"
 					}
@@ -178,13 +178,46 @@ class SudokuBoard {
 		:returns: False if the puzzle is impossible
 	*/
 	func solve() -> Bool {
-		// TODO:
+		
+		let inDebugMode = true
+		
+		if self.isSolved {
+			return true
+		}
+		
+		for (index, value) in enumerate(self.initialState) {
+			if value != "." {
+				if inDebugMode {
+					if value == "4" {
+						println(self.cells[index].name)
+					}
+					println("Will ASSIGN \(value) to cell \(self.cells[index].name) ... These are the current values:")
+					println(self.prettyValues)
+
+				}
+				if !self.cells[index].assign(String(value)) {
+					// We hit a contradiction assigning this value to a cell,
+					// Either it was a bad guess or the puzzle is malformed
+					return false
+				}
+				if self.isSolved {
+					// It's solved with the constraints we have applied so far
+					return true
+				}
+			}
+		}
+		
+		// The board is still not solved, we'll search for a solution ...
+		// Chose a solved cell with the fewest possibilities ...
+		// TODO!
+		
+		// Still got nothing :(
 		return false
 	}
 	
 	// MARK: Private methods
 	
-	// Returns an array of all the units in the board. 
+	// Returns an array of all the units in the board.
 	//
 	// These are the groups of 9 cells that must contain unique values
 	// (all rows, all columns, and all 3x3 groupings, so there is 27 of

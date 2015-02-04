@@ -28,4 +28,27 @@ extension String {
 		let range = self.rangeOfString(substring)
 		return distance(self.startIndex, range!.startIndex)
 	}
+	
+	public func ljust(width: Int, _ fillchar: Character = " ") -> String {
+		let length = countElements(self)
+		if length >= width {
+			return self
+		}
+		return self + String(count: width - length, repeatedValue: fillchar)
+	}
+	
+	public func rjust(width: Int, _ fillchar: Character = " ") -> String {
+		let length = countElements(self)
+		if length >= width {
+			return self
+		}
+		return String(count: width - length, repeatedValue: fillchar) + self
+	}
+	
+	public func center(width: Int, _ fillchar: Character = " ") -> String {
+		let length = countElements(self)
+		let oddShift = length % 2 == 1 ? 0.5 : 0.0 // Python is weird about string centering
+		let left = Int((Double(width) + Double(length)) / 2.0 + oddShift)
+		return self.ljust(left, fillchar).rjust(width, fillchar)
+	}
 }
